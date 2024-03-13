@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { createContext,useContext, useEffect, useState } from 'react'
-
+// import {ApiClient, DefaultApi} from 'finnhub'; // Change import statement to es6 syntax
 
 export const DataContext = createContext();
 
@@ -61,7 +61,45 @@ export const DataProvider = ({ children }) => {
            console.log(e);
          }
        };
-    ////
+    //// 
+    // const url = `https://nse-market.p.rapidapi.com/stock_metrics`;
+    // const url1 = `https://nse-market.p.rapidapi.com/security_info`;
+    // const url2 = `https://nse-market.p.rapidapi.com/corporate_actions`;
+    // const url3 = `https://nse-market.p.rapidapi.com/stocks`;
+    // const url4 = `https://nse-market.p.rapidapi.com/index_metrics`;
+    const options = {
+      method: 'GET',
+      url: 'https://real-time-finance-data.p.rapidapi.com/search',
+      params: {
+        query: 'adani',
+        language: 'en'
+      },
+      headers: {
+        'X-RapidAPI-Key': '340d12db0cmsh90b456c8f7aa9a2p1c64bfjsna6caa8fe654a',
+        'X-RapidAPI-Host': 'real-time-finance-data.p.rapidapi.com'
+      }
+    };
+    
+    const fetchData = async () => {
+      try {
+        const response = await axios.request(options);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+//     const api_key = ApiClient.instance.authentications['api_key'];
+// api_key.apiKey = "cnot4lhr01qgia583770cnot4lhr01qgia58377g" // Replace this
+// const finnhubClient = new DefaultApi()
+
+// // Stock candles
+// finnhubClient.stockCandles("AAPL", "D", 1590988249, 1591852249, (error, data, response) => {
+//     console.log(data)
+// });
+  
+    useEffect(() => {
+      fetchData();
+    }, []);
 
   useEffect(() => {
     getDataFromDB();
@@ -77,4 +115,3 @@ export const DataProvider = ({ children }) => {
     </DataContext.Provider>
   );
 }
-

@@ -13,7 +13,7 @@ const Header = () => {
               alt="..."
               class="img-thumbnail"
             ></img>
-            <Navbar.Brand>BlackCoffer Data Dashboard</Navbar.Brand>
+            <Navbar.Brand>Stock Analytics Dashboard</Navbar.Brand>
           </Container>
         </Navbar>
       </>

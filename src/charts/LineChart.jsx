@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line,Scatter } from "react-chartjs-2";
 
 const LineChart = ({ serverData }) => {
   // Get unique values for each field
