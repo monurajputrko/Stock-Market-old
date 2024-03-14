@@ -6,10 +6,44 @@ import LineChart from './LineChart';
 import RadarChart from './RadarChart';
 import PieChart from './PieChart';
 import { useData } from '../Context/DataContext';
+import { useEffect, useState } from 'react';
+import { randomString } from './Candles/Constant';
 
 export default function AllCharts() {
 
-  const { mainData, ChangeChart } = useData(); // Swithing Data Came from DataContext.jsx
+  const { ChangeChart } = useData(); // Swithing Data Came from DataContext.jsx
+  const [mainData, setStockData] = useState([]);
+  const fetchStockData = async (symbol) => {
+    // https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=IBM&
+            try {
+              const response = await fetch(`${process.env.REACT_APP_API}query?function=FX_DAILY&from_symbol=USD&to_symbol=INR&apikey=${randomString}`)
+              const data = await response.json()
+              
+              const weeklyTimeSeries = data['Time Series FX (Daily)'];
+              const dates = Object.keys(weeklyTimeSeries);
+              const datesData = [];
+              dates.forEach((date) => {
+                  const weeklyData = weeklyTimeSeries[date];
+                  const dateData = {
+                    date: date,
+                    open: weeklyData['1. open'],
+                    high: weeklyData['2. high'],
+                    low: weeklyData['3. low'],
+                    close: weeklyData['4. close'],
+                    volume: weeklyData['5. volume']
+                  };
+                  datesData.push(dateData);
+                });
+              console.log(data," And ",datesData)
+              setStockData(datesData)
+            } catch (error) {
+              console.log("Error = ",error)
+            }
+          }
+      
+          useEffect(() => {
+            fetchStockData(); 
+          }, [])
 
   const chartStyle = {
     border: "2px solid black",

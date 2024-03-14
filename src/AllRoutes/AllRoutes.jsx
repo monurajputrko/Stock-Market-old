@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Main from "../components/Main";
-import LiveChart from "../components/Candles/LiveChart";
+import LiveChart from './../charts/Candles/LiveChart';
 
 
 export const AllRoutes = ()=>{

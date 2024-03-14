@@ -1,62 +1,34 @@
 import React from "react";
-import { Line,Scatter } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 const LineChart = ({ serverData }) => {
-  // Get unique values for each field
-  const uniqueValues = {
-    sector: [],
-    country: [],
-    region: [],
-    source: [],
-    topic: [],
-    pestle: [],
-    intensity: [],
-    likelihood: [],
-    relevance: [],
-    year: [],
-    city: [],
-  };
-
-  serverData.forEach((item) => {
-    Object.keys(uniqueValues).forEach((field) => {
-      if (!uniqueValues[field].includes(item[field]) && item[field] !== "") {
-        uniqueValues[field].push(item[field]);
-      }
-    });
-  });
-
-  // Count the number of projects for each unique value
-  const data = Object.keys(uniqueValues).map((field) => ({
-    label: field,
-    data: uniqueValues[field].map((value) => ({
-      label: value,
-      count: serverData.filter((item) => item[field] === value).length,
-    })),
-  }));
+  // Extract dates and closing prices
+  console.log(serverData)
+  const stockData = serverData || [];
+  const dates = stockData.map((data) => data.date).reverse(); // Reverse to show recent dates first
+  const closingPrices = stockData.map((data) => parseFloat(data.close));
 
   // Create datasets for the chart
-  const datasets = data.map((item, index) => ({
-    label: item.label,
-    data: item.data.map((entry) => entry.count)
-  }));
+  const datasets = [{
+    label: 'Closing Prices',
+    data: closingPrices,
+    fill: false,
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.1
+  }];
 
-  // Create labels for the chart
-  const labels =
-    data.length > 0 ? data[0].data.map((entry) => entry.label) : [];
-  
   return (
     <div style={{ height: "50vh" }}>
       <Line
         data={{
-          labels: labels,
+          labels: dates,
           datasets: datasets,
         }}
         options={{
           maintainAspectRatio: false,
           scales: {
             y: {
-              type: "linear",
-              beginAtZero: true,
+              beginAtZero: false,
             },
           },
         }}
