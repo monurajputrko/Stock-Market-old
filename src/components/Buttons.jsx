@@ -30,7 +30,7 @@ export default function Buttons() {
         </Button>
 
         {/*  When Selecting Radar Chart */}
-        <Button
+        {/* <Button
           variant="info"
           onClick={() => {
             setChangeChart("RadarChart");
@@ -38,7 +38,7 @@ export default function Buttons() {
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
           Radar chart
-        </Button>
+        </Button> */}
 
         {/*  When Selecting Bar Chart */}
         <Button
@@ -52,7 +52,7 @@ export default function Buttons() {
         </Button>
 
         {/*  When Selecting Doughnut Chart */}
-        <Button
+        {/* <Button
           variant="info"
           onClick={() => {
             setChangeChart("DoughnutChart");
@@ -60,10 +60,10 @@ export default function Buttons() {
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
           Doughnut
-        </Button>
+        </Button> */}
 
         {/*  When Selecting Polar Chart */}
-        <Button
+        {/* <Button
           variant="info"
           onClick={() => {
             setChangeChart("PolarChart");
@@ -71,10 +71,10 @@ export default function Buttons() {
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
           Polar Chart
-        </Button>
+        </Button> */}
 
         {/*  When Selecting Pie Chart */}
-        <Button
+        {/* <Button
           variant="info"
           onClick={() => {
             setChangeChart("PieChart");
@@ -82,7 +82,7 @@ export default function Buttons() {
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
           Pie Chart
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
